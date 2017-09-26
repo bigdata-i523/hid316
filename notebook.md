@@ -14,6 +14,7 @@
 * 08/31/17 Bought Raspberry PI
 * 09/18/17 Updated README.md file
 * 09/25/17 Assembled Raspberry PI
+* 09/25/17 Created Notebook.md file
 
 # Writing
 
