@@ -22,11 +22,15 @@ paper1:
    hid:
    - 316
    title: Big Data Analytics in Biometric Identity Management
-   abstract: An understanding how biometrics is changing rapidly, and with it, both the size and scope of data being collected.            From 2-print to 10-print, iris to facial recognition, the demand for both data intensive processes and rapid matching have grown exponentially, a case study in big data if there ever was one.
+   abstract: >
+      An understanding how biometrics is changing rapidly, and with
+      it, both the size and scope of data being collected.
+      From 2-print to 10-print, iris to facial recognition, the demand
+      for both data intensive processes and rapid matching have grown
+      exponentially, a case study in big data if there ever was one. 
    url: https://github.com/bigdata-i523/sample-hid000/paper1/paper1.pdf
-   
-   Status: In Progress
-      
+   status: In Progress
+   chapter: Biology 
 ```
    
 # Paper 2
