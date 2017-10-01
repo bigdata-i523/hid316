@@ -30,7 +30,7 @@ paper1:
       exponentially, a case study in big data if there ever was one. 
    url: https://github.com/bigdata-i523/sample-hid000/paper1/paper1.pdf
    status: In Progress
-   chapter: Biology 
+   chapter: Security 
 ```
    
 # Paper 2
