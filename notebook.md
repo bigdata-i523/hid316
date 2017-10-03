@@ -8,6 +8,7 @@
 
 * 08/28/17 - 09/01/17 Watched all videos in the Theory Introduction section
 * 09/18/17 - 09/22/17 Watched several DIY videos on Raspberry PI, especially related to robotics
+* 10/01/17 Watched instructor video on how to generate and format the report.bib file
 
 # Practice
 
@@ -21,3 +22,4 @@
 * 09/07/17 Installed Github
 * 09/07/17 Installed Future Systems
 * 09/07/17 Installed Chameleon Cloud
+* 10/01/17 - 10/03/17 Worked on Paper 1
