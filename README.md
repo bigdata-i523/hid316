@@ -29,6 +29,7 @@ paper1:
       for both data intensive processes and rapid matching have grown
       exponentially, a case study in big data if there ever was one. 
    url: https://github.com/bigdata-i523/sample-hid000/paper1/paper1.pdf
+   type: latex
    status: 85%
    chapter: Security 
 ```
