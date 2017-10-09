@@ -23,14 +23,10 @@ paper1:
    - 316
    title: Big Data Analytics in Biometric Identity Management
    abstract: >
-      An understanding how biometrics is changing rapidly, and with
-      it, both the size and scope of data being collected.
-      From 2-print to 10-print, iris to facial recognition, the demand
-      for both data intensive processes and rapid matching have grown
-      exponentially, a case study in big data if there ever was one. 
+      The United States Government, through its collection and use of biometric data, has leveraged big data in order to protect its citizens and keep our country safe. The speed and accuracy with which this biometric data can be effectively matched to an identity can mean the difference between life and death, as well as the integrity of our institutions. This paper predominantly focuses on how the United States Government, collects, stores, and uses big data to facilitate solving crimes and to enhance national security. 
    url: https://github.com/bigdata-i523/sample-hid000/paper1/paper1.pdf
    type: latex
-   status: 85%
+   status: 99%
    chapter: Security 
 ```
    
