@@ -24,7 +24,8 @@ paper1:
 paper2:
     abstract: >
         Explores the potential for smart refrigerators enabled with services such as Instacart 
-        for efficient inventory management, automated re-order, food/meal suggestions based on preference and health needs.
+        for efficient inventory management, automated re-order, food/meal suggestions based on preference 
+        and health needs.
         author:
     author:
         - Robert Gasiewicz
