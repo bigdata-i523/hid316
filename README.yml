@@ -20,13 +20,18 @@ paper1:
     status: 100%
     title: Big Data Analytics in Biometric Identity Management
     type: latex
-    url: https://github.com/bigdata-i523/sample-hid000/paper1/paper1.pdf
+    url: https://github.com/bigdata-i523/sample-hid316/paper1/paper1.pdf
 paper2:
-    abstract: This paper showcases tis and that and the other
+    abstract: >
+        Explores the potential for smart refrigerators enabled with services such as Instacart 
+        for efficient inventory management, automated re-order, food/meal suggestions based on preference and health needs.
+        author:
     author:
-        - Gregor von Laszewski
+        - Robert Gasiewicz
+    chapter: Security
     hid:
-        - 0
-    title: Benchmarking a BigData Docker deployment
-    type: report
-    url: https://github.com/bigdata-i523/sample-pid000/project/report.pdf
+        - 316
+    status: 10%
+    title: Big data on IoT Smart Refrigerators
+    type: latex
+    url: https://github.com/bigdata-i523/sample-hid316/paper2/paper2.pdf
