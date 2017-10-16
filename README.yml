@@ -1,0 +1,38 @@
+---
+owner:
+    hid: 316
+    name: Robert Gasiewicz
+    url: https://github.com/bigdata-i523/hid316
+paper1:
+    abstract: >
+        The United States Government, through its collection and use of biometric
+        data, has leveraged big data in order to protect its citizens and keep our
+        country safe. The speed and accuracy with which this biometric data can
+        be effectively matched to an identity can mean the difference between life
+        and death, as well as the integrity of our institutions. This paper predominantly
+        focuses on how the United States Government, collects, stores, and uses
+        big data to facilitate solving crimes and to enhance national security.
+    author:
+        - Robert Gasiewicz
+    chapter: Security
+    hid:
+        - 316
+    status: 100%
+    title: Big Data Analytics in Biometric Identity Management
+    type: latex
+    url: https://github.com/bigdata-i523/sample-hid316/paper1/paper1.pdf
+paper2:
+    abstract: >
+        Explores the potential for smart refrigerators enabled with services such as Instacart 
+        for efficient inventory management, automated re-order, food/meal suggestions based on preference 
+        and health needs.
+        author:
+    author:
+        - Robert Gasiewicz
+    chapter: Security
+    hid:
+        - 316
+    status: 10%
+    title: Big data on IoT Smart Refrigerators
+    type: latex
+    url: https://github.com/bigdata-i523/sample-hid316/paper2/paper2.pdf
