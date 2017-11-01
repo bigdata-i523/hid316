@@ -38,7 +38,7 @@ paper2:
     title: Big Data on IoT Smart Refrigerators
     type: latex
     url: https://github.com/bigdata-i523/sample-hid316/paper2/paper2.pdf
- Project:
+project:
     abstract: >
         This project will use Raspberry Pi3 and Sense Hat to provide
         weather data to Weather Underground's distributed weather
