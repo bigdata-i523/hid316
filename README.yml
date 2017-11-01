@@ -32,7 +32,23 @@ paper2:
     chapter: Security
     hid:
         - 316
-    status: 90%
+    status: 100%
     title: Big Data on IoT Smart Refrigerators
     type: latex
     url: https://github.com/bigdata-i523/sample-hid316/paper2/paper2.pdf
+ Project:
+    abstract: >
+        This project will use Raspberry Pi3 and Sense Hat to provide weather data to Weather Underground's distributed 
+        weather station network. Data will be analyzed from the weather station created for this project along with other 
+        home weather stations in the immediate vicinity on Weather Underground's network to determine variance and accuracy 
+        with the general (National Weather Service) forecast for my locale. This weather forecast is used to drive IoT devices 
+        such as Nest, which could potentially work more efficiently if they were fed with localized weather data sources.
+     author:
+        - Robert Gasiewicz
+    chapter: Security
+    hid:
+        - 316
+    status: 10%
+    title: Edge Analytics for Weather Monitoring and Forecasting
+    type: Project
+    url: https://github.com/bigdata-i523/sample-hid316/Project/Project.pdf
