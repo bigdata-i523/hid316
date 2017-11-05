@@ -24,6 +24,7 @@ paper1:
     type: latex
     url: https://github.com/bigdata-i523/sample-hid316/paper1/paper1.pdf
 paper2:
+    review: Nov 6 2017
     abstract: >
         Explores the potential for smart refrigerators enabled with
         services such as Instacart for efficient inventory management,
