@@ -6,6 +6,8 @@
 * 10/09/17 - 10/13/17 Read Content Section 3.3 - 3.5
 * 10/16/71 - 10/20/17 Read Content Section 3.6
 * 10/23/17 - 10/27/17 Read Content Section 3.7 - 3.8
+* 10/30/17 - 11/03/17 Read Content Section 3.9 - 3.10
+* 11/06/17 - 11/10/17 Read Content Section 4.1 - 4.3
 
 # Theory
 
@@ -15,6 +17,8 @@
 * 10/09/17 - 10/13/17 Began researching for Paper 2
 * 10/16/71 - 10/20/17 Continued researching for Paper 2
 * 10/23/17 - 10/27/17 Began researching ideas for term project
+* 10/30/17 - 11/03/17 Selected Term Project
+* 11/06/17 - 11/10/17 Finalized Plan for Term Project
 
 # Practice
 
@@ -25,6 +29,9 @@
 * 10/15/17 Updated Notebook.md file
 * 10/27/17 Bought Sense Hat and Sense Hat Raspberry Pi3 case upgrade
 * 10/29/17 Updated Notebook.md file
+* 10/30/17 - 11/03/17 Initial boot of Raspberry Pi 3, assessed additional hardware needs
+* 11/06/17 - 11/10/17 Configured Raspberry Pi 3, SenseHat, completed weather station coding, began streaming weather data to Weather Underground
+* 11/15/17 Updated Notebook.md file
 
 # Writing
 
@@ -35,3 +42,4 @@
 * 10/04/17 - 10/09/17 Finalized, reviewed, and submitted Paper 1
 * 10/16/71 - 10/20/17 Reviewed, corrected and re-submitted Paper 1
 * 10/23/17 - 10/27/17 Began writing Paper 2
+* 10/30/17 - 11/03/17 Completed writing Paper 2
