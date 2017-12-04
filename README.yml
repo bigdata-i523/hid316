@@ -56,7 +56,7 @@ project:
     chapter: Security
     hid:
         - 316
-    status: 50%
+    status: 100%
     title: Edge Analytics for Weather Monitoring and Forecasting
     type: Project
     url: https://github.com/bigdata-i523/sample-hid316/Project/Project.pdf
