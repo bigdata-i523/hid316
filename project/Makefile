@@ -241,4 +241,4 @@ bib-extract:
 
 skim:
 	echo $(DEFAULT)
-open -a /Applications/skim.app $(DEFAULT).pdf
+	open -a /Applications/skim.app $(DEFAULT).pdf

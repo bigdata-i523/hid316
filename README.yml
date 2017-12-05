@@ -53,7 +53,7 @@ project:
         with localized weather data sources.
     author:
         - Robert Gasiewicz
-    chapter: Security
+    chapter: Edge Computing
     hid:
         - 316
     status: 100%
