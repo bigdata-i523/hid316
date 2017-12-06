@@ -1,4 +1,3 @@
-
 %%
 %% This is file `acmart.cls',
 %% generated with the docstrip utility.

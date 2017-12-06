@@ -42,7 +42,7 @@ simple:
 
 
 check:
-	@wget -q https://raw.githubusercontent.com/bigdata-i523/sample-hid000/master/project/check.py -O check.py
+	@wget -q https://raw.githubusercontent.com/bigdata-i523/sample-hid000/master/paper1/check.py -O check.py
 	@python check.py
 
 bibtex:
@@ -163,7 +163,7 @@ insert:
 	tail ${REVIEW}.tex
 
 #review-fetch:
-#	wget -q https://raw.githubusercontent.com/bigdata-i523/sample-hid000/master/project/issues.tex
+#	wget -q https://raw.githubusercontent.com/bigdata-i523/sample-hid000/master/paper1/issues.tex
 
 review:
 	rm -rf ~/tmp-review
