@@ -1,6 +1,9 @@
 \documentclass[sigconf]{acmart}
-\usepackage[parfill]{parskip}
-\usepackage{graphicx}
+
+\input{format/final}
+
+%\usepackage[parfill]{parskip}
+%\usepackage{graphicx}
 \begin{document}
 \title{Big Data and Edge Analytics in Weather Monitoring and Forecasting}
 
@@ -59,49 +62,64 @@ Personal Weather Stations can be built in a number of different ways, using a va
 
 The physical act of building the PWS itself is relatively easy and doesn't have a significant time requirement. These are the steps that were followed:
 \begin{enumerate}
-\item Unboxed the Raspberry Pi 3 and Sense Hat.
+\item Unboxed the Raspberry Pi 3 and Sense Hat (see Figure \ref{F:rasp}).
 \item Connected the Sense Hat to the Raspberry Pi 3.
 \item Attached heat sink to the Raspberry Pi 3 that were included with the C4 Labs Zebra Case. These needed to be mounted prior placing the Raspberry Pi 3 and Sense Hat into the Zebra Case.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\columnwidth]{images/RASP3_1.jpg}
-    \caption{Unboxed Raspberry Pi 3 with heatsink attached prior to mounting on case bottom}
-\end{figure}
 \item With the Sense Hat and heat sinks attached, the Zebra Case is assembled in layers around the components, beginning with the bottom and building upward. The heatsinks should fit through the precut holes in the Zebra Case, facing downward and the Sense Hat LED matrix and sensors are facing upward.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\columnwidth]{images/SENSE_Case1.jpg}
-    \caption{Sense Hat attached to the Raspberry Pi 3 with the Zebra Case assembled upward from the bottom in layers}
-\end{figure}
 \item As the layers were added, it was important to ensure the various components, especially the Raspberry Pi 3 and the Sense Hat remained aligned in the case.
 \item Insert the screws and rivets and close the case.
 \item Before powering on, insert a mini SD card pre-loaded with the NOOBS operating system. A 32GB card was used for this project, but since data is only being read and streamed to the cloud, a not a lot of disk space is required. Even so, disk space still needed to be expanded during the initial setup.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\columnwidth]{images/Bottom_Case.jpg}
-    {\bf IMAGE MISSING IN GIT}
-    \caption{SD Card inserted through the slot on the bottom of the PWS}
-\end{figure}
 \end{enumerate}
+
+\TODO{Figure must use label and ref, see How I did tit for Figure \ref{F:rasp}}
+
+\begin{figure}[p]
+    {\centering
+    \includegraphics[width=0.6\columnwidth]{images/RASP3_1.jpg}}
+    \caption{Unboxed Raspberry Pi 3 with heatsink attached prior to mounting on case bottom}\label{F:rasp}
+%\end{figure}
+
+\bigskip
+
+%\begin{figure}[htb]
+    {\centering
+    \includegraphics[width=0.6\columnwidth]{images/SENSE_Case1.jpg}}
+    \caption{Sense Hat attached to the Raspberry Pi 3 with the Zebra Case assembled upward from the bottom in layers}
+%\end{figure}
+
+\bigskip
+
+%\begin{figure}[htb]
+    {\centering
+    \includegraphics[width=0.6\columnwidth]{images/Bottom_Case.jpg}}
+    \caption{SD Card inserted through the slot on the bottom of the PWS}
+%\end{figure}
+
+\bigskip
+
+%\begin{figure}[htb]
+    {\centering
+    \includegraphics[width=0.6\columnwidth]{images/ON.jpg}}
+    \caption{PWS powered on for the first time}
+\end{figure}
+
 
 \section{Initial Configuration of the Raspberry Pi 3}
 
 After building the physical infrastructure of the PWS, it was configured with the NOOBS operating system that was pre-loaded on the mini SD card and then updates were installed. These were the steps that were followed:
 
-\begin{enumerate}
-\item Plugged mini USB plug into the Raspberry Pi 3.
-\begin{figure}[H]
+
+
+\begin{figure}[htb]
     \centering
-    \includegraphics[width=\columnwidth]{images/ON.jpg}
-    \caption{PWS powered on for the first time}
-\end{figure}
-\item Plugged peripherals (monitor, keyboard, mouse) into the Raspberry Pi 3.
-\item The device booted and began automatically installing the NOOBS operating system.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\columnwidth,angle=-90]{images/Raspbian_Boot.jpg}
+    \includegraphics[width=0.5\columnwidth]{images/Raspbian_Boot.jpg}
     \caption{NOOBS OS is in the process of installing}
 \end{figure}
+
+\begin{enumerate}
+\item Plugged mini USB plug into the Raspberry Pi 3.
+\item Plugged peripherals (monitor, keyboard, mouse) into the Raspberry Pi 3.
+\item The device booted and began automatically installing the NOOBS operating system.
 \item After NOOBS completed its installation, the Raspberry Pi preferences could be configured. 
 \item By selecting Preferences -> Raspberry Pi Configuration, disk space could then be expanded by clicking the "Expand Filesystem" button. This was required because the default setup ultimately leaves too little disk space for all the software required for the project. SHOW IMAGE
 \item The hostname can also be renamed so that it can easily be found on your home WiFi network.
@@ -146,29 +164,34 @@ cd pi_weather_station
 
 Overall the Python source code used for this project is fairly straightforward\cite{WundergroundPython2017}. In essence, it is telling the Sense Hat to measure temperature, humidity, and pressure during specific intervals and to send them to Weather underground. 
 
+\TODO{You need a sentence with the Figure \ref{F:upload}. Long code must be in a figure}
+
+\begin{figure}[htb]
 \begin{verbatim}
 if WEATHER_UPLOAD:
-    print("Uploading data to Weather Underground")
-        weather_data = {
-            "action": "updateraw",
-            "ID": wu_station_id,
-            "PASSWORD": wu_station_key,
-            "dateutc": "now",
-            "tempf": str(temp_f),
-            "humidity": str(humidity),
-            "baromin": str(pressure),
-            }
-            try:
-                upload_url = WU_URL + "?" + urlencode(weather_data)
-                response = urllib2.urlopen(upload_url)
-                html = response.read()
-                print("Server response:", html)
-                response.close()  
-        except:
-            print("Exception:", sys.exc_info()[0], SLASH_N)
-        else:
-            print("Skipping Weather Underground upload")
+  print("Uploading data to Weather Underground")
+    weather_data = {
+      "action": "updateraw",
+      "ID": wu_station_id,
+      "PASSWORD": wu_station_key,
+      "dateutc": "now",
+      "tempf": str(temp_f),
+      "humidity": str(humidity),
+      "baromin": str(pressure),
+      }
+      try:
+        upload_url = WU_URL + "?" + urlencode(weather_data)
+        response = urllib2.urlopen(upload_url)
+        html = response.read()
+        print("Server response:", html)
+        response.close() 
+    except:
+      print("Exception:", sys.exc_info()[0], SLASH_N)
+    else:
+      print("Skipping Weather Underground upload")
 \end{verbatim}
+\caption{YOUR CAPTION HERE}\label{F:upload}
+\end{figure}
 
 The code also makes use of the Sense Hat's 8X8 full-color LED matrix to display with a "W" for Warmer if the moving average of the temperature has increased since the past interval or a "C" for Cooler if the moving average of the temperature has decreased since the past interval. If the moving average of the temperature remains the same since the past interval, it displays a red and blue equal sign for no change in temperature. 
 
@@ -254,12 +277,22 @@ def get_smooth(x):
     get_smooth.t[1] = get_smooth.t[0]
     get_smooth.t[0] = x
     # average of the last 3 smooth temps
-    xs = (get_smooth.t[0] + get_smooth.t[1] + get_smooth.t[2]) / 3
+    xs = (get_smooth.t[0] + \
+          get_smooth.t[1] + \
+          get_smooth.t[2]) / 3
     return xs
 \end{verbatim}
 
 
-For this project, the above source code was saved as personal\textunderscore weather\textunderscore station.py and placed in the pi\textunderscore weather\textunderscore station directory that was created during steps we did for configuring the Sense Hat. In addition to the personal\textunderscore weather\textunderscore station.py code, a configuration file is also required in order for the PWS to be able to interface with Weather Underground. The configuration file is fairly simple, comprised of just 3 lines of code:
+For this project, the above source code was saved as 
+
+\verb|personal_weather_station.py| 
+
+and placed in the 
+
+\verb|pi_weather_station| 
+
+ directory that was created during steps we did for configuring the Sense Hat. In addition to the \verb|personal_weather_station.py| code, a configuration file is also required in order for the PWS to be able to interface with Weather Underground. The configuration file is fairly simple, comprised of just 3 lines of code:
 
 
 \begin{verbatim}
@@ -282,17 +315,17 @@ Setting up a PWS on Weather Underground network wasn't particularly difficult, b
     \item A name was also picked for the PWS, and for the purposes of this project, the name "Deer Ridge" was selected.
 \end{enumerate}
 
-After completing these steps, the Station ID and Station Access Key were provided but were not yet entered into the config.py file in the pi\textunderscore weather \textunderscore station directory on the PWS. It was only after successful completion of testing and automation that this final step was taken.
+After completing these steps, the Station ID and Station Access Key were provided but were not yet entered into the config.py file in the \verb|pi_weather_station| directory on the PWS. It was only after successful completion of testing and automation that this final step was taken.
 
 \section{Initial Testing and Automation}
 
-Prior to placing the PWS outside (where it will no longer be easy to plug in its peripherals), some initial testing was conducted before automating the startup of the personal\textunderscore weather\textunderscore station.py script and submitting potentially false and inaccurate data to Weather Underground. It was also during this testing that the Sense Hat warm temperature sensor issue first presented itself and it was determined that it needed to be fixed prior to configuring the device to send data to Weather Underground. 
+Prior to placing the PWS outside (where it will no longer be easy to plug in its peripherals), some initial testing was conducted before automating the startup of the \verb|personal_weather_station.py| script and submitting potentially false and inaccurate data to Weather Underground. It was also during this testing that the Sense Hat warm temperature sensor issue first presented itself and it was determined that it needed to be fixed prior to configuring the device to send data to Weather Underground. 
 
 After plugging in the device and manually launching the main source code script, it was confirmed that the script was working as expected, including the readouts on the LED matrix display. Data began populating at 5 second intervals in the terminal window and the correct readouts were displaying on the LED matrix. However, according to the Nest in my home the ambient temperature in the house was 70 degrees Fahrenheit. Yet the PWS was registering at 81 degrees Fahrenheit and climbing. Thus, as it was explained in the above section on the project source code, a workaround had to be implemented in the code to compensate for this temperature. 
 
 Once that issue was resolved, it was time to configure the PWS scripts to run automatically upon PWS startup. The advantages to doing this allowed the PWS to be moved (unplugged from its power source) and to maintain a constant stream of weather data to Weather Underground in the event of a power outage or WiFi reboot. 
 
-This automated startup can be accomplished by opening a terminal window and navigating to the pi\textunderscore weather \textunderscore station directory on the PWS. Once there, the project's Bash script file can be turned into an executable using the following command:
+This automated startup can be accomplished by opening a terminal window and navigating to the \verb|pi_weather_station| directory on the PWS. Once there, the project's Bash script file can be turned into an executable using the following command:
 
 
 \begin{verbatim}
@@ -308,7 +341,8 @@ Once this command was entered, then the autostart file can be opened and the fol
 \end{verbatim}
 
 
-After rebooting the PWS, the personal\textunderscore weather\textunderscore station.py then started automatically. The script was then stopped and the Station ID and Station Access Key that were provided by Weather Underground during registration were entered into the config.py file in the pi\textunderscore weather \textunderscore station directory on the PWS.
+
+After rebooting the PWS, the \verb|personal_weather_station.py| then started automatically. The script was then stopped and the Station ID and Station Access Key that were provided by Weather Underground during registration were entered into the config.py file in the \verb|pi_weather_station| directory on the PWS.
 
 \section{PWS Location Selection}
 
@@ -316,7 +350,7 @@ Before turning on the PWS and transmitting data to Weather Underground, a suitab
 
 The most reasonable location available for this project was the inside of a fence post, tucked under the eves of the house. This way, the PWS was not in direct sunlight, in danger of getting wet, and also near a power supply. The PWS was mounted on the fence post about 5 feet off the ground and plugged into a power source. 
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=\columnwidth]{images/Location1.jpg}
     \caption{PWS mounted in an outdoor, protected area, out of direct sunlight}
@@ -328,12 +362,6 @@ The geographic location chosen for the PWS was Northern California with the time
 
 Both the geography and topography of the area around the site of the PWS built for this project vary greatly within 1-5 miles let alone 10-20 miles. Roughly half of the people who live in the United States live within 17 miles of an airport, while 90 percent live within 58 miles of an airport.\cite{Pearson2017} In nearly all cases, airports are equipped with the most advanced weather station and data collection technology, so they are often most cited for their data. As an official weather source for this project, the KSCK Stockton Airport WS weather station is 31 miles away and is the closest major airport to the location of the PWS built for this project. The Stockton Airport WS weather station collects a variety of comprehensive weather data, though for this project, we are only comparing temperature, humidity, and pressure. 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\columnwidth]{images/DR_Stockton.PNG}
-    \caption{Location of the Deer Ridge PWS (Blue Dot in relation to Stockton Airport PWS (Red Dot)}
-    \label{Image 1: Deer Ridge}
-\end{figure}
 
 \section{Addition PWS Data Selection}
 
@@ -345,31 +373,45 @@ In addition to the official weather source from Stockton Airport WS, 3 additiona
 
 Type: Netatmo Weather Station, located less than 1 mile from the Deer Ridge PWS at an elevation of 173 feet.
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
-    \includegraphics[width=\columnwidth]{images/DR_DRCC.PNG}
-    \caption{Location of Deer Ridge PWS (Blue Dot) in relation to Deer Ridge Country Club PWS (Red Dot)}
+    \includegraphics[width=\columnwidth]{images/DR_Stockton.PNG}
+    \caption{Location of the Deer Ridge PWS (Blue Dot in relation to Stockton Airport PWS (Red Dot)}
+    \label{Image 1: Deer Ridge}
 \end{figure}
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=.56\columnwidth]{images/DR_DRCC.PNG}
+    \caption{Location of Deer Ridge PWS (Blue Dot) in relation to Deer Ridge Country Club PWS (Red Dot)}
+%\end{figure}
+
+\bigskip
+
+%\begin{figure}[htb]
+    \centering
+    \includegraphics[width=.56\columnwidth]{images/DR_Campinello.PNG}
+    \caption{Location of Deer Ridge PWS (Blue Dot) in relation to Campanello PWS (Red Dot)}
+%\end{figure}
+
+\bigskip
+
+%\begin{figure}[htb]
+    \centering
+    \includegraphics[width=.56\columnwidth]{images/DR_MTP.PNG}
+    \caption{Location of Deer Ridge PWS (Blue Dot) in relation to Morgan Territory PWS (Red Dot)}
+\end{figure}
+
 
 \subsection{Campanello PWS}
 
 Type: Netatmo Weather Station, located 2.2 miles from the Deer Ridge PWS at an elevation of 88 feet.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\columnwidth]{images/DR_Campinello.PNG}
-    \caption{Location of Deer Ridge PWS (Blue Dot) in relation to Campanello PWS (Red Dot)}
-\end{figure}
 
 \subsection{Morgan Territory PWS} 
 
 Type: AcuRite Pro Weather Center, located 4.8 miles from the Deer Ridge PWS at an elevation of 820 feet.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\columnwidth]{images/DR_MTP.PNG}
-    \caption{Location of Deer Ridge PWS (Blue Dot) in relation to Morgan Territory PWS (Red Dot)}
-    \end{figure}
 
 \section{PWS Data Analysis}
 
@@ -395,7 +437,7 @@ A total of 6 data elements were collected from 5 weather stations:
 
 The first part of the analysis that was performed as to determine if there were any outliers in the data that could, if used to feed a Nest or Tesla Solar Array, cause equipment to operate inefficiently. Obviously, given that the over-arching goal of this project is to conserve energy and allow equipment to function in the most efficient manner possible based on the most localized weather data possible, it must be determined if these sources are usable. In order to do this, Pandas was used to create a DataFrame from a CSV in iPython Notebook and Matplotlib was used to generate a bar graph. The first analysis performed was weekly record (max values) with regard to temperature, humidity, and pressure for each PWS. While the differences in pressure were negligible, there were some significant variances in both temperature and humidity, not only between the various local PWSs, but also when compared to Stockton. 
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=\columnwidth]{images/WK_REC_TEMP.PNG}
     \caption{Weekly Record High Temperatures}
@@ -405,7 +447,7 @@ The most significant differences were between Campanello PWS and Deer Ridge Coun
 
 With Deer Ridge PWS falling near the average of the 5 weather stations, it would seem that the Deer Ridge Country Club PWS is either having calibration issues or is mounted in a place that is less than ideal, such as on or near a concrete surface or in direct sunlight. The Deer Ridge PWS is also closest to the Stockton Airport WS, so this is very positive news in terms of furthering the goal of obtaining the most accurate, local weather.
 
-\begin{figure}[H]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=\columnwidth]{images/WK_REC_HUM.PNG}
     \caption{Weekly Record High Humidity}
