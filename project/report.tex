@@ -64,13 +64,13 @@ The physical act of building the PWS itself is relatively easy and doesn't have 
 \item Attached heat sink to the Raspberry Pi 3 that were included with the C4 Labs Zebra Case. These needed to be mounted prior placing the Raspberry Pi 3 and Sense Hat into the Zebra Case.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.10]{RASP3_1.jpg}
+    \includegraphics[width=\columnwidth]{images/RASP3_1.jpg}
     \caption{Unboxed Raspberry Pi 3 with heatsink attached prior to mounting on case bottom}
 \end{figure}
 \item With the Sense Hat and heat sinks attached, the Zebra Case is assembled in layers around the components, beginning with the bottom and building upward. The heatsinks should fit through the precut holes in the Zebra Case, facing downward and the Sense Hat LED matrix and sensors are facing upward.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.10]{SENSE_Case1.jpg}
+    \includegraphics[width=\columnwidth]{images/SENSE_Case1.jpg}
     \caption{Sense Hat attached to the Raspberry Pi 3 with the Zebra Case assembled upward from the bottom in layers}
 \end{figure}
 \item As the layers were added, it was important to ensure the various components, especially the Raspberry Pi 3 and the Sense Hat remained aligned in the case.
@@ -78,7 +78,8 @@ The physical act of building the PWS itself is relatively easy and doesn't have 
 \item Before powering on, insert a mini SD card pre-loaded with the NOOBS operating system. A 32GB card was used for this project, but since data is only being read and streamed to the cloud, a not a lot of disk space is required. Even so, disk space still needed to be expanded during the initial setup.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.10]{Bottom_Case.jpg}
+    \includegraphics[width=\columnwidth]{images/Bottom_Case.jpg}
+    {\bf IMAGE MISSING IN GIT}
     \caption{SD Card inserted through the slot on the bottom of the PWS}
 \end{figure}
 \end{enumerate}
@@ -91,31 +92,32 @@ After building the physical infrastructure of the PWS, it was configured with th
 \item Plugged mini USB plug into the Raspberry Pi 3.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.10]{ON.jpg}
+    \includegraphics[width=\columnwidth]{images/ON.jpg}
     \caption{PWS powered on for the first time}
 \end{figure}
 \item Plugged peripherals (monitor, keyboard, mouse) into the Raspberry Pi 3.
 \item The device booted and began automatically installing the NOOBS operating system.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.10, angle=-90]{Raspbian_Boot.jpg}
+    \includegraphics[width=\columnwidth,angle=-90]{images/Raspbian_Boot.jpg}
     \caption{NOOBS OS is in the process of installing}
 \end{figure}
 \item After NOOBS completed its installation, the Raspberry Pi preferences could be configured. 
 \item By selecting Preferences -> Raspberry Pi Configuration, disk space could then be expanded by clicking the "Expand Filesystem" button. This was required because the default setup ultimately leaves too little disk space for all the software required for the project. SHOW IMAGE
 \item The hostname can also be renamed so that it can easily be found on your home WiFi network.
 \item It's also a good idea to update the Raspberry Pi 3's software, which was done by opening a terminal window entering the following command - which updates the Raspberry Pi 3's indexes of the most up-to-date software packages:
-\begin{code}
+
+
 \begin{verbatim}
 sudo apt-get update
 \end{verbatim}
-\end{code}
+
 \item After software packages were updated, entering the following command then updated the Raspbian OS to the most current configuration available:
-\begin{code}
+
 \begin{verbatim}
 sudo apt-get upgrade
 \end{verbatim}
-\end{code}
+
 \item At this point, the device was ready to begin configuration of the PWS specific software and coding.
 \end{enumerate}
 
@@ -125,24 +127,25 @@ Once the Raspberry Pi 3 was correctly configured, the next major step was instal
 
 \begin{enumerate}
 \item Enter the following command to install the Sense Hat libraries:
-\begin{code}
+
+\begin{verbatim}
 sudo apt-get install sense-hat
-\end{code}
+\end{verbatim}
+
 \item Once the Sense Hat libraries were installed, a directory was created for the Python code. This was done using the following set of commands:
-\begin{code}
+
 \begin{verbatim}
 cd ~
 mkdir pi_weather_station
 cd pi_weather_station
 \end{verbatim}
-\end{code}
+
 \end{enumerate}
 
 \section{PWS Python Source Code}
 
 Overall the Python source code used for this project is fairly straightforward\cite{WundergroundPython2017}. In essence, it is telling the Sense Hat to measure temperature, humidity, and pressure during specific intervals and to send them to Weather underground. 
 
-\begin{code}
 \begin{verbatim}
 if WEATHER_UPLOAD:
     print("Uploading data to Weather Underground")
@@ -166,11 +169,9 @@ if WEATHER_UPLOAD:
         else:
             print("Skipping Weather Underground upload")
 \end{verbatim}
-\end{code}
 
 The code also makes use of the Sense Hat's 8X8 full-color LED matrix to display with a "W" for Warmer if the moving average of the temperature has increased since the past interval or a "C" for Cooler if the moving average of the temperature has decreased since the past interval. If the moving average of the temperature remains the same since the past interval, it displays a red and blue equal sign for no change in temperature. 
 
-\begin{code}
 \begin{verbatim}
 b = [0, 0, 255]  # blue
 r = [255, 0, 0]  # red
@@ -206,22 +207,21 @@ bars = [
     e, e, e, e, e, e, e, e
 ]
 \end{verbatim}
-\end{code}
+
 
 There a few nuances to the code, one of which converts the standard Sense Hat measurement of temperature from Celsius to Fahrenheit and pressure from millibars to inHG. 
 
 Celsius to Fahrenheit:
-\begin{code}
+
 \begin{verbatim}
 def c_to_f(input_temp):
     # conversion of the temp from Celsius to Fahrenheit
     return (input_temp * 1.8) + 32
 \end{verbatim}
-\end{code}
+
 
 Another issue that had to be overcome was the warmth of the Raspberry Pi 3 and Sense Hat causing the temperature readings to be about 10-15 degrees warmer in Fahrenheit than the ambient temperature. Weather Underground will eventually disconnect PWSs which display erroneous and incorrect data. This was overcome by employing a "hack" available from the Pi Foundation\cite{PiFoundationHack2017}:
 
-\begin{code}
 \begin{verbatim}
 def get_temp():
     t1 = sense.get_temperature_from_humidity()
@@ -241,11 +241,11 @@ def main():
     if last_minute == 0:
         last_minute = 59
 \end{verbatim}
-\end{code}
+
 
 Another nuance to the data collection aspect is the moving average. Though the PWS is only sending weather data to Weather Underground every 10 minutes, it is reading the data locally on the device every 5 seconds and sending the moving average to Weather Underground. 
 
-\begin{code}
+
 \begin{verbatim}
 def get_smooth(x):
     if not hasattr(get_smooth, "t"):
@@ -257,17 +257,17 @@ def get_smooth(x):
     xs = (get_smooth.t[0] + get_smooth.t[1] + get_smooth.t[2]) / 3
     return xs
 \end{verbatim}
-\end{code}
+
 
 For this project, the above source code was saved as personal\textunderscore weather\textunderscore station.py and placed in the pi\textunderscore weather\textunderscore station directory that was created during steps we did for configuring the Sense Hat. In addition to the personal\textunderscore weather\textunderscore station.py code, a configuration file is also required in order for the PWS to be able to interface with Weather Underground. The configuration file is fairly simple, comprised of just 3 lines of code:
 
-\begin{code}
+
 \begin{verbatim}
 class Config:
     STATION_ID = ""
     STATION_KEY = ""
 \end{verbatim}
-\end{code}
+
 
 Both the Station ID and the Station Key are obtained when setting up an account on Weather Underground. More on that next.
 
@@ -294,19 +294,19 @@ Once that issue was resolved, it was time to configure the PWS scripts to run au
 
 This automated startup can be accomplished by opening a terminal window and navigating to the pi\textunderscore weather \textunderscore station directory on the PWS. Once there, the project's Bash script file can be turned into an executable using the following command:
 
-\begin{code}
+
 \begin{verbatim}
     chmod +x start-station.sh
 \end{verbatim}
-\end{code}
+
 
 Once this command was entered, then the autostart file can be opened and the following line of code can be added:
 
-\begin{code}
+
 \begin{verbatim}
 @lxterminal -e /home/pi/pi_weather_station/start-station.sh
 \end{verbatim}
-\end{code}
+
 
 After rebooting the PWS, the personal\textunderscore weather\textunderscore station.py then started automatically. The script was then stopped and the Station ID and Station Access Key that were provided by Weather Underground during registration were entered into the config.py file in the pi\textunderscore weather \textunderscore station directory on the PWS.
 
@@ -318,7 +318,7 @@ The most reasonable location available for this project was the inside of a fenc
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.10]{Location1.jpg}
+    \includegraphics[width=\columnwidth]{images/Location1.jpg}
     \caption{PWS mounted in an outdoor, protected area, out of direct sunlight}
 \end{figure}
 
@@ -330,7 +330,7 @@ Both the geography and topography of the area around the site of the PWS built f
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.40]{DR_Stockton.PNG}
+    \includegraphics[width=\columnwidth]{images/DR_Stockton.PNG}
     \caption{Location of the Deer Ridge PWS (Blue Dot in relation to Stockton Airport PWS (Red Dot)}
     \label{Image 1: Deer Ridge}
 \end{figure}
@@ -347,7 +347,7 @@ Type: Netatmo Weather Station, located less than 1 mile from the Deer Ridge PWS 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.40]{DR_DRCC.PNG}
+    \includegraphics[width=\columnwidth]{images/DR_DRCC.PNG}
     \caption{Location of Deer Ridge PWS (Blue Dot) in relation to Deer Ridge Country Club PWS (Red Dot)}
 \end{figure}
 
@@ -357,7 +357,7 @@ Type: Netatmo Weather Station, located 2.2 miles from the Deer Ridge PWS at an e
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.40]{DR_Campanello.PNG}
+    \includegraphics[width=\columnwidth]{images/DR_Campinello.PNG}
     \caption{Location of Deer Ridge PWS (Blue Dot) in relation to Campanello PWS (Red Dot)}
 \end{figure}
 
@@ -367,7 +367,7 @@ Type: AcuRite Pro Weather Center, located 4.8 miles from the Deer Ridge PWS at a
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.40]{DR_MTP.PNG}
+    \includegraphics[width=\columnwidth]{images/DR_MTP.PNG}
     \caption{Location of Deer Ridge PWS (Blue Dot) in relation to Morgan Territory PWS (Red Dot)}
     \end{figure}
 
@@ -397,7 +397,7 @@ The first part of the analysis that was performed as to determine if there were 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.30]{WK_REC_TEMP.PNG}
+    \includegraphics[width=\columnwidth]{images/WK_REC_TEMP.PNG}
     \caption{Weekly Record High Temperatures}
 \end{figure}
 
@@ -407,7 +407,7 @@ With Deer Ridge PWS falling near the average of the 5 weather stations, it would
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.30]{WK_REC_HUM.PNG}
+    \includegraphics[width=\columnwidth]{images/WK_REC_HUM.PNG}
     \caption{Weekly Record High Humidity}
 \end{figure}
 
@@ -423,7 +423,7 @@ The bottom line for the Nest is that if Weather Underground can come up with an 
 
 In terms of the Tesla Solar Array, according to Tesla's website, the only way they are currently utilizing weather data is during the design phase when they are determining feasibility for installing a solar array at client's home or business\cite{Tesla2017}:
 
-\textquote "We will review past utility bills, sunlight patterns, and weather data for your area and create a custom system design for your home."
+``We will review past utility bills, sunlight patterns, and weather data for your area and create a custom system design for your home.''
 
 What Tesla doesn't say is from where they are sourcing their data. If similar to Nest's sourcing, then Tesla's design process would also benefit from using more accurate, localized weather data. Additionally, given that Tesla solar systems are also IoT devices in that they interface both with the utility company and Tesla for the purposes of metering and monitoring, respectively, it would also be beneficial for Tesla to begin utilizing real-time weather data as well for the purposes of enhancing efficiency and energy productivity. Moreover, Nest (owned by Google) and Tesla could partner to use localized, highly accurate weather data observation and forecasting to automate two systems that manage virtually all of the energy needs of 21st century living. Personal Weather Stations as a Service (PWSaaS) could quicky become another fixture of the wired home.
 
