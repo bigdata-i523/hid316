@@ -71,8 +71,6 @@ The physical act of building the PWS itself is relatively easy and doesn't have 
 \item Before powering on, insert a mini SD card pre-loaded with the NOOBS operating system. A 32GB card was used for this project, but since data is only being read and streamed to the cloud, a not a lot of disk space is required. Even so, disk space still needed to be expanded during the initial setup.
 \end{enumerate}
 
-\TODO{Figure must use label and ref, see How I did tit for Figure \ref{F:rasp}}
-
 \begin{figure}[p]
     {\centering
     \includegraphics[width=0.6\columnwidth]{images/RASP3_1.jpg}}
@@ -164,8 +162,6 @@ cd pi_weather_station
 
 Overall the Python source code used for this project is fairly straightforward\cite{WundergroundPython2017}. In essence, it is telling the Sense Hat to measure temperature, humidity, and pressure during specific intervals and to send them to Weather underground. 
 
-\TODO{You need a sentence with the Figure \ref{F:upload}. Long code must be in a figure}
-
 \begin{figure}[htb]
 \begin{verbatim}
 if WEATHER_UPLOAD:
@@ -190,11 +186,12 @@ if WEATHER_UPLOAD:
     else:
       print("Skipping Weather Underground upload")
 \end{verbatim}
-\caption{YOUR CAPTION HERE}\label{F:upload}
+\caption{Section of Python code instructing the Sense Hat to measure temperature, humidity, and pressure}\label{F:upload}
 \end{figure}
 
 The code also makes use of the Sense Hat's 8X8 full-color LED matrix to display with a "W" for Warmer if the moving average of the temperature has increased since the past interval or a "C" for Cooler if the moving average of the temperature has decreased since the past interval. If the moving average of the temperature remains the same since the past interval, it displays a red and blue equal sign for no change in temperature. 
 
+\begin{figure}[htb]
 \begin{verbatim}
 b = [0, 0, 255]  # blue
 r = [255, 0, 0]  # red
@@ -230,21 +227,26 @@ bars = [
     e, e, e, e, e, e, e, e
 ]
 \end{verbatim}
+\caption{Section of Python code instructing the Sense Hat how to display various symbols indicating temperature changes on the LED matrix}\label{F:upload}
+\end{figure}
 
 
 There a few nuances to the code, one of which converts the standard Sense Hat measurement of temperature from Celsius to Fahrenheit and pressure from millibars to inHG. 
 
 Celsius to Fahrenheit:
 
+\begin{figure}[htb]
 \begin{verbatim}
 def c_to_f(input_temp):
     # conversion of the temp from Celsius to Fahrenheit
     return (input_temp * 1.8) + 32
 \end{verbatim}
-
+\caption{Section of Python code converting the temperature from Celsius to Fahrenheit}\label{F:upload}
+\end{figure}
 
 Another issue that had to be overcome was the warmth of the Raspberry Pi 3 and Sense Hat causing the temperature readings to be about 10-15 degrees warmer in Fahrenheit than the ambient temperature. Weather Underground will eventually disconnect PWSs which display erroneous and incorrect data. This was overcome by employing a "hack" available from the Pi Foundation\cite{PiFoundationHack2017}:
 
+\begin{figure}[htb]
 \begin{verbatim}
 def get_temp():
     t1 = sense.get_temperature_from_humidity()
@@ -264,11 +266,12 @@ def main():
     if last_minute == 0:
         last_minute = 59
 \end{verbatim}
-
+\caption{Section of Python code correcting for the higher CPU temperature}\label{F:upload}
+\end{figure}
 
 Another nuance to the data collection aspect is the moving average. Though the PWS is only sending weather data to Weather Underground every 10 minutes, it is reading the data locally on the device every 5 seconds and sending the moving average to Weather Underground. 
 
-
+\begin{figure}[htb]
 \begin{verbatim}
 def get_smooth(x):
     if not hasattr(get_smooth, "t"):
@@ -282,7 +285,8 @@ def get_smooth(x):
           get_smooth.t[2]) / 3
     return xs
 \end{verbatim}
-
+\caption{Section of Python code averaging temps taken over a short time period}\label{F:upload}
+\end{figure}
 
 For this project, the above source code was saved as 
 
@@ -294,13 +298,14 @@ and placed in the
 
  directory that was created during steps we did for configuring the Sense Hat. In addition to the \verb|personal_weather_station.py| code, a configuration file is also required in order for the PWS to be able to interface with Weather Underground. The configuration file is fairly simple, comprised of just 3 lines of code:
 
-
+\begin{figure}[htb]
 \begin{verbatim}
 class Config:
     STATION_ID = ""
     STATION_KEY = ""
 \end{verbatim}
-
+\caption{Section of Python code for inputting Weather Underground Station ID and Station Key}\label{F:upload}
+\end{figure}
 
 Both the Station ID and the Station Key are obtained when setting up an account on Weather Underground. More on that next.
 
@@ -327,19 +332,21 @@ Once that issue was resolved, it was time to configure the PWS scripts to run au
 
 This automated startup can be accomplished by opening a terminal window and navigating to the \verb|pi_weather_station| directory on the PWS. Once there, the project's Bash script file can be turned into an executable using the following command:
 
-
+\begin{figure}[htb]
 \begin{verbatim}
     chmod +x start-station.sh
 \end{verbatim}
-
+\caption{Section of Python code for creating the auto start script}\label{F:upload}
+\end{figure}
 
 Once this command was entered, then the autostart file can be opened and the following line of code can be added:
 
-
+\begin{figure}[htb]
 \begin{verbatim}
 @lxterminal -e /home/pi/pi_weather_station/start-station.sh
 \end{verbatim}
-
+\caption{Section of Python code for the auto start script itself}\label{F:upload}
+\end{figure}
 
 
 After rebooting the PWS, the \verb|personal_weather_station.py| then started automatically. The script was then stopped and the Station ID and Station Access Key that were provided by Weather Underground during registration were entered into the config.py file in the \verb|pi_weather_station| directory on the PWS.
