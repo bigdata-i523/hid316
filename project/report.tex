@@ -160,7 +160,7 @@ cd pi_weather_station
 
 \section{PWS Python Source Code}
 
-Overall the Python source code used for this project is fairly straightforward\cite{WundergroundPython2017}. In essence, it is telling the Sense Hat to measure temperature, humidity, and pressure during specific intervals and to send them to Weather underground. 
+Overall the Python source code used for this project is fairly straightforward\cite{WundergroundPython2017}. In essence, it is telling the Sense Hat to measure temperature, humidity, and pressure during specific intervals and to send them to Weather underground. In the figure below, the code begins by initiating contact with the Weather Underground and defines variables for data upload.
 
 \begin{figure}[htb]
 \begin{verbatim}
@@ -186,10 +186,10 @@ if WEATHER_UPLOAD:
     else:
       print("Skipping Weather Underground upload")
 \end{verbatim}
-\caption{Section of Python code instructing the Sense Hat to measure temperature, humidity, and pressure}\label{F:upload}
+\caption{Section of Python code instructing the Sense Hat to initiate contact with Weather Underground and define various variables for data upload.}\label{F:upload}
 \end{figure}
 
-The code also makes use of the Sense Hat's 8X8 full-color LED matrix to display with a "W" for Warmer if the moving average of the temperature has increased since the past interval or a "C" for Cooler if the moving average of the temperature has decreased since the past interval. If the moving average of the temperature remains the same since the past interval, it displays a red and blue equal sign for no change in temperature. 
+The code also makes use of the Sense Hat's 8X8 full-color LED matrix to display with a "W" for Warmer if the moving average of the temperature has increased since the past interval or a "C" for Cooler if the moving average of the temperature has decreased since the past interval, as shown in the figure below. If the moving average of the temperature remains the same since the past interval, it displays a red and blue equal sign for no change in temperature. 
 
 \begin{figure}[htb]
 \begin{verbatim}
@@ -231,7 +231,7 @@ bars = [
 \end{figure}
 
 
-There a few nuances to the code, one of which converts the standard Sense Hat measurement of temperature from Celsius to Fahrenheit and pressure from millibars to inHG. 
+There a few nuances to the code, as seen in the figure below, which converts the standard Sense Hat measurement of temperature from Celsius to Fahrenheit. Pressure is also converted from millibars to inHG. 
 
 Celsius to Fahrenheit:
 
@@ -244,7 +244,7 @@ def c_to_f(input_temp):
 \caption{Section of Python code converting the temperature from Celsius to Fahrenheit}\label{F:upload}
 \end{figure}
 
-Another issue that had to be overcome was the warmth of the Raspberry Pi 3 and Sense Hat causing the temperature readings to be about 10-15 degrees warmer in Fahrenheit than the ambient temperature. Weather Underground will eventually disconnect PWSs which display erroneous and incorrect data. This was overcome by employing a "hack" available from the Pi Foundation\cite{PiFoundationHack2017}:
+Another issue that had to be overcome was the warmth of the Raspberry Pi 3 and Sense Hat causing the temperature readings to be about 10-15 degrees warmer in Fahrenheit than the ambient temperature. Weather Underground will eventually disconnect PWSs which display erroneous and incorrect data. This was overcome by employing a "hack" available from the Pi, shown in the figure below. Foundation\cite{PiFoundationHack2017}:
 
 \begin{figure}[htb]
 \begin{verbatim}
@@ -269,7 +269,7 @@ def main():
 \caption{Section of Python code correcting for the higher CPU temperature}\label{F:upload}
 \end{figure}
 
-Another nuance to the data collection aspect is the moving average. Though the PWS is only sending weather data to Weather Underground every 10 minutes, it is reading the data locally on the device every 5 seconds and sending the moving average to Weather Underground. 
+Another nuance to the data collection aspect is the moving average. Though the PWS is only sending weather data to Weather Underground every 10 minutes, it is reading the data locally on the device every 5 seconds and sending the moving average to Weather Underground using the follow code:
 
 \begin{figure}[htb]
 \begin{verbatim}
